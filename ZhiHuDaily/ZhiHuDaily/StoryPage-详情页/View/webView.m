@@ -9,16 +9,12 @@
 #import "StoryInformation.h"
 
 @implementation webView
-
+/// 请求URL，展示新闻
 - (void)setStoryinformation:(StoryInformation *)storyinformation {
     _storyinformation = storyinformation;
     NSURL *url = [NSURL URLWithString:storyinformation.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self loadRequest:request];
-}
-
-- (void)try {
-    
 }
 
 @end

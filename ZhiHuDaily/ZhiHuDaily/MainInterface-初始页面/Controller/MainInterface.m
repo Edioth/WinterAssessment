@@ -21,13 +21,12 @@
 #import <MJRefresh.h>
 
 @interface MainInterface ()
-{
-    ///登录状态
-    BOOL loginStastus;
-}
+
 @property (nonatomic, strong) NSMutableArray *stories;
 @property (nonatomic, strong) NSArray *top_stories;
+/// 日期 用于申请更多数据
 @property (nonatomic, copy) NSString *date;
+
 @property (nonatomic, copy) NSString *userName;
 
 @end
@@ -39,7 +38,6 @@
 }
 
 - (void)viewDidLoad {
-    loginStastus = NO;
     [super viewDidLoad];
     [self loadStoriesAndTop_Stories];
     self.tableView.rowHeight = 110;
@@ -50,8 +48,6 @@
     [self.tableView registerClass:[StoriesCell class] forCellReuseIdentifier:@"StoriesCell"];
     /** 刷新 */
     [self loadHeaderAndFooterRefresh];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LogOff) name:@"Logoff" object:nil];
-
 }
 
 #pragma mark - 加载导航栏
@@ -112,10 +108,6 @@
     return str;
 }
 #pragma mark - 点击方法
-- (void)LogOff {
-    loginStastus = NO;
-    [self loadRightView];
-}
 - (void)clickPortrait {
     //跳转判断
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"isLogin"] isEqualToString:@""]) {
@@ -169,6 +161,7 @@
 }
 
 #pragma mark - Table view delegate
+/// 头控件
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section > 0) {
         UILabel *sectionDate = [[UILabel alloc] init];
@@ -196,7 +189,7 @@
     }
     return self.tableView.frame.size.width;
 }
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
+///cell 被点击的方法
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Push the view controller.
     StoriesCell *story = [tableView cellForRowAtIndexPath:indexPath];

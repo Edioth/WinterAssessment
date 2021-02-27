@@ -20,7 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 + (instancetype)storiesWithdic:(NSDictionary *)dic;
+/// 加载最新新闻
 + (void)storiesWithSuccess:(void(^)(NSArray *array))success error:(void(^)(void))error;
+/// 下滑加载更多数据
 + (void)loadMorestoriesWithDateString:(NSString *)URLString Success:(void(^)(NSArray *array))success error:(void(^)(void))error;
 
 

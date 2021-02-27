@@ -14,7 +14,7 @@
 @end
 
 @implementation HeadPortrait
-
+//初始化控件
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -22,22 +22,23 @@
     }
     return self;
 }
+//加载头视图的子控件
 - (void)loadSubviews {
-    ///头像
+    //初始化头像
     UIImageView *icon = [[UIImageView alloc] init];
     icon.backgroundColor = [UIColor redColor];
     icon.layer.cornerRadius = 50;
     [self addSubview:icon];
     self.icon = icon;
 
-    ///昵称
+    //初始化昵称
     UILabel *name = [[UILabel alloc] init];
     [name setFont:[UIFont systemFontOfSize:22]];
     [self addSubview:name];
     self.name = name;
 
 }
-
+//布局子控件
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -50,12 +51,6 @@
         make.width.height.mas_equalTo(100);
     }];
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
 
 @end

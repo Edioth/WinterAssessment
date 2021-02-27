@@ -290,8 +290,6 @@
 			isa = PBXGroup;
 			children = (
 				73C63B7225E4FF050068BCB9 /* Controller */,
-				73C63B7325E4FF050068BCB9 /* Model */,
-				73C63B7425E4FF050068BCB9 /* View */,
 			);
 			path = "MyMessages-我的消息";
 			sourceTree = "<group>";
@@ -303,20 +301,6 @@
 				73C63BD625E544600068BCB9 /* MyMessages.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		73C63B7325E4FF050068BCB9 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		73C63B7425E4FF050068BCB9 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		73C63B7525E4FF050068BCB9 /* Portrait-个人页 */ = {

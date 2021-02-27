@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface StoryPageView : UIView
 
 //- (void)loadStoryWithURLString:(NSString *)URLString;
+//加载方法
 - (void)loadStoryBody:(StoryInformation *)storyinformation;
 - (void)loadExtraInformation:(ExtraInformation *)extrainformation;
 @end

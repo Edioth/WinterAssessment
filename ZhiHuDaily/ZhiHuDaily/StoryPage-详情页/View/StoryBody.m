@@ -12,6 +12,7 @@
 
 - (void)setStoryinformation:(StoryInformation *)storyinformation {
     _storyinformation = storyinformation;
+    //翻译HTML格式的body 直接展示出来
     NSString *htmlBody = storyinformation.body;
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[htmlBody dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType} documentAttributes:nil error:nil];
     self.attributedText = attributedString;

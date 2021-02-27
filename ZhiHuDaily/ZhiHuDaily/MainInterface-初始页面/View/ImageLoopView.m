@@ -191,17 +191,13 @@
         return;
     }
     
-//    [_middleImageView setImageWithURL:[NSURL URLWithString:((Top_Stories *)images[0]).image]];
     [_middleImageView setTop_story:(Top_Stories *)images[0]];
     
     if (images.count > 1) {
-//        [_rightImageView setImageWithURL:[NSURL URLWithString:((Top_Stories *)images[1]).image]];
-//        [_leftImageView setImageWithURL:[NSURL URLWithString:((Top_Stories *)images[images.count - 1]).image]];
         [_rightImageView setTop_story:(Top_Stories *)images[1]];
         [_leftImageView setTop_story:(Top_Stories *)images[images.count - 1]];
 
     }
-    
     
     _pageControl.numberOfPages = images.count;
     
@@ -234,7 +230,6 @@
 - (void) resetImageForImageViews:(CGFloat)offsetX {
     // 判断是左滑还是右滑，即确定当前操作时上一页还是下一页
     CGFloat width = self.frame.size.width;
-//    CGFloat offsetX = scrollView.contentOffset.x;
     if (offsetX == 2 * width) {  // 左滑：下一页
         if (_currentIndex == (_images.count - 1)) {
             _currentIndex = 0;
@@ -252,13 +247,10 @@
     _pageControl.currentPage = _currentIndex;
     
     // 1. 修改left、middle、right对应的图片
-//    [_middleImageView setImageWithURL:[NSURL URLWithString:((Top_Stories *)_images[_currentIndex]).image]];
     [_middleImageView setTop_story:(Top_Stories *)_images[_currentIndex]];
     if (_currentIndex  - 1 == -1) { // 防止索引出界
-//        [_leftImageView setImageWithURL:[NSURL URLWithString:((Top_Stories *)_images[_images.count - 1]).image]];
         [_leftImageView setTop_story:(Top_Stories *)_images[_images.count - 1]];
     } else {
-//        [_leftImageView setImageWithURL:[NSURL URLWithString:((Top_Stories *)_images[_currentIndex - 1]).image]];
         [_leftImageView setTop_story:(Top_Stories *)_images[_currentIndex - 1]];
 
     }
@@ -273,7 +265,7 @@
     }
 }
 
-
+// 定时器间隔
 - (void)setInterval:(NSTimeInterval)interval {
     _interval = interval;
     if (self.timer != nil) {
@@ -283,12 +275,12 @@
     [self startAutoScroll:interval];
 }
 
-
+// 开始定时器
 - (void)startAutoScroll:(NSTimeInterval)interval {
     _timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(loopImageTimer) userInfo:nil repeats:YES];
 }
 
-
+//时间控制器
 - (void)loopImageTimer {
     // 1. 先滚动
     // 2. 再替换图片
@@ -304,7 +296,7 @@
     }];
 }
 
-
+//添加手势
 - (void)tapGesture:(UITapGestureRecognizer *)tapGesture {
     if (self.actionBlock != nil) {
         self.actionBlock(_currentIndex);

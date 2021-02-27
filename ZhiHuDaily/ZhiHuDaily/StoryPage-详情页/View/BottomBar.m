@@ -11,7 +11,9 @@
 
 @interface BottomBar ()
 {
+    /// 是否点赞
     BOOL isPraised;
+    /// 是否收藏
     BOOL isCollected;
 }
 ///返回
@@ -24,26 +26,24 @@
 @property (nonatomic, weak) UIButton *collectButtom;
 ///转发
 @property (nonatomic, weak) UIButton *repostButtom;
-
-
 @end
 
 @implementation BottomBar
-
+/// 加载模型
 - (void)setExtraInformation:(ExtraInformation *)extraInformation {
     _extraInformation = extraInformation;
     [self.praiseButtom setTitle:[NSString stringWithFormat:@"%@", extraInformation.popularity] forState:UIControlStateNormal];
     [self.commentButtom setTitle:[NSString stringWithFormat:@"%@", extraInformation.comments] forState:UIControlStateNormal];
 }
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
+///初始化方法
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self loadSubviews];
     }
     return self;
 }
+///加载控件
 - (void)loadSubviews {
     // 返回
     UIButton *backbutton = [[UIButton alloc] init];
@@ -93,6 +93,7 @@
     isPraised = NO;
     isCollected = NO;
 }
+///布局子控件
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self.backButtom mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -121,31 +122,39 @@
     }];
 }
 
-
+///点击了返回按钮
 - (void)clickBack {
+    //发出通知，控制器实现按钮功能
     NSNotification *note = [NSNotification notificationWithName:@"clickBack" object:nil];
     [[NSNotificationCenter defaultCenter] postNotification:note];
 }
-
+///点击了点赞按钮
 - (void)clickPraise {
+    ///用属性判断是否点赞并发出通知使对应数值减少
     if (isPraised) {//取消点赞
         [self.praiseButtom setImage:[UIImage imageNamed:@"News_Navigation_Vote"] forState:UIControlStateNormal];
         isPraised = NO;
+        ///发出通知，StoryPage控制器实现功能
         [[NSNotificationCenter defaultCenter] postNotificationName:@"praiseFail" object:nil];
     } else {//点赞成功
         [self.praiseButtom setImage:[UIImage imageNamed:@"News_Navigation_Voted"] forState:UIControlStateNormal];
         isPraised = YES;
+        ///发出通知，StoryPage实现功能
         [[NSNotificationCenter defaultCenter] postNotificationName:@"praiseSuccess" object:nil];
     }
 }
+///点击了收藏按钮
 - (void)clickCollect {
+    ///用属性判断是否收藏
     if (isCollected) {
         [self.collectButtom setImage:[UIImage imageNamed:@"Menu_Icon_Collect"] forState:UIControlStateNormal];
         isCollected = NO;
+        ///发出通知，StoryPage控制器实现功能
         [[NSNotificationCenter defaultCenter] postNotificationName:@"CollectFail" object:nil];
     } else {
         [self.collectButtom setImage:[UIImage imageNamed:@"Menu_Icon_Collect_Highlight"] forState:UIControlStateNormal];
         isCollected = YES;
+        ///发出通知，StoryPage控制器实现功能
         [[NSNotificationCenter defaultCenter] postNotificationName:@"CollectSuccess" object:nil];
     }
 }

@@ -17,11 +17,6 @@
     [super viewDidLoad];
     self.tableView.rowHeight = 70;
     self.tableView.backgroundColor = [UIColor lightGrayColor];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 #pragma mark - Table view data source
@@ -81,7 +76,9 @@
     return 10;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //实现退出登录的功能
     if (indexPath.section == 4) {
+        //偏好设置中将 isLogin userName 这两个属性置为空
         [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"isLogin"];
         [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"userName"];
         [self.navigationController popToRootViewControllerAnimated:YES];

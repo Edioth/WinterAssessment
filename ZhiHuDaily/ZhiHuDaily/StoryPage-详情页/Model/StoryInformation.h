@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface StoryInformation : NSObject
-
+/** 模型的数据 */
 @property (nonatomic, copy) NSString *body;
 @property (nonatomic, copy) NSString *image;
 @property (nonatomic, copy) NSString *url;
@@ -27,9 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *css;
 @property (nonatomic, strong) NSArray *images;
 @property (nonatomic, strong) NSArray *js;
-
+/** 初始化方法 */
 - (instancetype)initWithDic:(NSDictionary *)dic;
 + (instancetype)storyinformationWithDic:(NSDictionary *)dic;
+/** 网络请求方法 */
 + (void)storyinformationWithStoryid:(NSString *)Storyid Success:(void(^)(StoryInformation *storyinformation))success Error:(void(^)(void))error;
 
 @end

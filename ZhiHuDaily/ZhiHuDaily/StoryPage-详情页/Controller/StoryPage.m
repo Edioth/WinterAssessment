@@ -14,19 +14,16 @@
 @interface StoryPage ()
 ///底部导航栏
 @property (nonatomic, weak) StoryPageView *storypageView;
-
-///新闻的额外信息
+///新闻的id
 @property (nonatomic, copy) NSString *storyid;
+///新闻的额外信息
 @property (nonatomic, strong) ExtraInformation *extrainformation;
+///新闻的主体
 @property (nonatomic, strong) StoryInformation *storyinformation;
 @end
 
 @implementation StoryPage
-- (void)setExtrainformation:(ExtraInformation *)extrainformation {
-    _extrainformation = extrainformation;
-    [(StoryPageView *)self.view loadExtraInformation:self.extrainformation];
-}
-
+/** 初始化方法 */
 - (instancetype)initWithStoryId:(NSString *)storyId {
     self = [super init];
     if (self) {
@@ -37,20 +34,23 @@
 + (instancetype)storyPageWithStoryId:(NSString *)storyId {
     return [[self alloc] initWithStoryId:storyId];
 }
-
+/** 给数据赋值 */
+- (void)setExtrainformation:(ExtraInformation *)extrainformation {
+    _extrainformation = extrainformation;
+    [(StoryPageView *)self.view loadExtraInformation:self.extrainformation];
+}
 - (void)setStoryinformation:(StoryInformation *)storyinformation {
     _storyinformation = storyinformation;
     [(StoryPageView *)self.view loadStoryBody:storyinformation];
     
 //    [(StoryPageView *)self.view loadStoryWithURLString:storyinformation.url];
 }
-
+/** 加载视图 */
 - (void)loadView {
     StoryPageView *storypageView = [[StoryPageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     storypageView.backgroundColor = [UIColor whiteColor];
     self.view = storypageView;
 }
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
@@ -59,7 +59,7 @@
     [self loadStoryInformation];
     
 }
-
+///监听通知
 - (void)addNotification {
     ///底部栏的按钮点击监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clickBack) name:@"clickBack" object:nil];
@@ -68,10 +68,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSuccess) name:@"CollectSuccess" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectFail) name:@"CollectFail" object:nil];
 }
+///移除监听
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 #pragma mark -
+/** 对应按钮的点击方法 */
 - (void)clickBack {
     self.navigationController.navigationBarHidden = NO;
     [self.navigationController popViewControllerAnimated:YES];
@@ -92,6 +94,8 @@
 - (void)collectSuccess {
     [self alterWithMessage:@"收藏成功"];
 }
+
+///弹出提示框
 - (void)alterWithMessage:(NSString *)msg {
     UIAlertController *alter = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alter animated:YES completion:nil];

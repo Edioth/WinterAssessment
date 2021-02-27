@@ -24,6 +24,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.myCollections.count;
 }
+//和主页的Cell同属于一个类，显示收藏的新闻
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *MyCollectionsCellID = @"myCollectionsCell";
     StoriesCell *cell = [tableView dequeueReusableCellWithIdentifier:MyCollectionsCellID];
@@ -35,6 +36,7 @@
 }
 #pragma mark - Table view delegate
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    //设置收藏页的底部提示
     UILabel *footerLabel = [[UILabel alloc] init];
     footerLabel.textAlignment = NSTextAlignmentCenter;
     footerLabel.text = @"没有更多东西了哦";
